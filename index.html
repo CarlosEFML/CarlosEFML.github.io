@@ -16,6 +16,7 @@
       oReq.onload = reqListener;
       oReq.open("get", "https://api.kvstore.io/collections/new_collection/items/my-key", true);
       oReq.setRequestHeader('kvstoreio_api_key', '593f80c2ba5b84871a40be8e498eb9c8083e57f5561f96121a7d4eefa3c52092');
+      oReq.setRequestHeader('Access-Control-Allow-Headers', 'kvstoreio_api_key');
       
       oReq.send();
     }
