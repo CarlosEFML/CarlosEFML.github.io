@@ -3,11 +3,28 @@
   <script async src="https://api.kvstore.io/js/public.js?storage_uuid=a7630eeb-4619-45b5-bb1d-3c1833a6c877"></script>
   <script>
     function sendData() {
-      window.post('new_collection', 'my-key', 'my value');
+      window.post('new_collection', 'my-key', document.getElementById('val').value);
     }
+
+    function reqListener () {
+      console.log(this.responseText);
+      document.getElementById('val').value = this.responseText;
+    };
+
+    function loadData() {
+      var oReq = new XMLHttpRequest();
+      oReq.onload = reqListener;
+      oReq.open("get", "https://api.kvstore.io/collections/new_collection/items/my-key", true);
+      oReq.setRequestHeader('kvstoreio_api_key', '593f80c2ba5b84871a40be8e498eb9c8083e57f5561f96121a7d4eefa3c52092');
+      
+      oReq.send();
+    }
+    
+    loadData();
   </script>
 </head>
   TEST
-  <button onclick='sendData'>OI</button>
+  <input id='val' type='text'>
+  <button onclick='sendData()'>OI</button>
 </html>
 
