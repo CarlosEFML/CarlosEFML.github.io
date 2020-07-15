@@ -1,5 +1,13 @@
 <html>
-TEST
-<img src="foto.jpg">
+<head>
+  <script async src="https://api.kvstore.io/js/public.js?storage_uuid=a7630eeb-4619-45b5-bb1d-3c1833a6c877"></script>
+  <script>
+    function sendData() {
+      window.post('new_collection', 'my-key', 'my value');
+    }
+  </script>
+</head>
+  TEST
+  <button onclick='sendData'>OI</button>
 </html>
 
