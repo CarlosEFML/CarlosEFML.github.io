@@ -11,20 +11,29 @@
       document.getElementById('val').value = this.responseText;
     };
 
-    function loadData() {
+    function loadData(key) {
       var oReq = new XMLHttpRequest();
       oReq.onload = reqListener;
-      oReq.open("get", "https://api.kvstore.io/collections/new_collection/items/my-key", true);
+      oReq.open("get", "https://api.kvstore.io/collections/new_collection/items/" + key, true);
       oReq.setRequestHeader('kvstoreio_api_key', '593f80c2ba5b84871a40be8e498eb9c8083e57f5561f96121a7d4eefa3c52092');
       oReq.setRequestHeader('Access-Control-Allow-Headers', 'kvstoreio_api_key');
       
       oReq.send();
     }
     
-    loadData();
+    loadData("my-key");
+
+    var items = [];
+    function addItem() {
+      var content = document.getElementById('content');
+    }
   </script>
 </head>
-  TEST
+  <div>Nome do documento</div>
+  <div><input id='doc' type='text'></div>
+  <div id='content'></div>
+  <button onclick='addItem()'>Add</button>
+
   <input id='val' type='text'>
   <button onclick='sendData()'>OI</button>
 </html>
