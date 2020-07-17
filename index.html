@@ -61,7 +61,9 @@
 
       var oReq = new XMLHttpRequest();
       oReq.onload = function() {
-        window.alert(this.responseText);
+        var doc = JSON.parse(this.responseText);
+        window.alert(doc.value);
+        window.alert(JSON.stringify(doc.value));
       };
       oReq.open("get", "https://api.kvstore.io/collections/new_collection/items/" + docName, true);
       oReq.setRequestHeader('kvstoreio_api_key', '593f80c2ba5b84871a40be8e498eb9c8083e57f5561f96121a7d4eefa3c52092');
@@ -71,7 +73,7 @@
     }
   </script>
 </head>
-  <div>Nome do documento</div>
+  <div>Nome do documento:</div>
   <div><input id='doc' type='text'> <button onclick='loadDoc()'>Load</button></div>
   <div id='content'></div>
   <div><button onclick='addItem()'>Add</button></div>
