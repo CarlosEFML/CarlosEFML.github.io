@@ -27,9 +27,9 @@
     function addItem() {
       var content = document.getElementById('content');
       var itemDiv = document.createElement('div');
-      var keyLabel = document.createTextNode('Chave:');
+      var keyLabel = document.createTextNode('Chave: ');
       var keyInput = document.createElement('input');
-      var valueLabel = document.createTextNode('Valor:');
+      var valueLabel = document.createTextNode('Valor: ');
       var valueInput = document.createElement('input');
 
       itemDiv.appendChild(keyLabel);
@@ -38,13 +38,41 @@
       itemDiv.appendChild(valueInput);
 
       content.appendChild(itemDiv);
+
+      items[items.length] = {
+        "keyInput": keyInput,
+        "valueInput": valueInput
+      };
+    }
+
+    function saveDoc() {
+      var docName = document.getElementById('doc').value;
+      var docContent = JSON.stringify(items);
+
+      window.post('new_collection', docName, docContent);
+    }
+
+    function loadDoc() {
+      var docName = document.getElementById('doc').value;
+
+      var oReq = new XMLHttpRequest();
+      oReq.onload = function() {
+        window.alert(this.responseText);
+      };
+      oReq.open("get", "https://api.kvstore.io/collections/new_collection/items/" + docName, true);
+      oReq.setRequestHeader('kvstoreio_api_key', '593f80c2ba5b84871a40be8e498eb9c8083e57f5561f96121a7d4eefa3c52092');
+      oReq.setRequestHeader('Access-Control-Allow-Headers', 'kvstoreio_api_key');
+      
+      oReq.send();
     }
   </script>
 </head>
   <div>Nome do documento</div>
-  <div><input id='doc' type='text'></div>
+  <div><input id='doc' type='text'> <button onclick='loadDoc()'>Load</button></div>
   <div id='content'></div>
-  <button onclick='addItem()'>Add</button>
+  <div><button onclick='addItem()'>Add</button></div>
+  <div><button onclick='saveDoc()'>Save</button></div>
+  
 
   <input id='val' type='text'>
   <button onclick='sendData()'>OI</button>
