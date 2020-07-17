@@ -26,6 +26,18 @@
     var items = [];
     function addItem() {
       var content = document.getElementById('content');
+      var itemDiv = document.createElement('div');
+      var keyLabel = document.createTextNode('Chave:');
+      var keyInput = document.createElement('input');
+      var valueLabel = document.createTextNode('Valor:');
+      var valueInput = document.createElement('input');
+
+      itemDiv.appendChild(keyLabel);
+      itemDiv.appendChild(keyInput);
+      itemDiv.appendChild(valueLabel);
+      itemDiv.appendChild(valueInput);
+
+      content.appendChild(itemDiv);
     }
   </script>
 </head>
