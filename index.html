@@ -47,9 +47,13 @@
 
     function saveDoc() {
       var docName = document.getElementById('doc').value;
-      var docContent = JSON.stringify(items);
+      var docContent = {};
 
-      window.post('new_collection', docName, docContent);
+      for (i=0; i<items.length; i++) {
+        docContent[items[i].keyInput.value] = items[i].valueInput.value;
+      }
+
+      window.post('new_collection', docName, JSON.stringify(docContent));
     }
 
     function loadDoc() {
