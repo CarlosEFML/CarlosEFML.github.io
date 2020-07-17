@@ -61,11 +61,10 @@
 
       var oReq = new XMLHttpRequest();
       oReq.onload = function() {
-        var doc = JSON.parse(this.responseText);
-        window.alert(doc.value);
-        window.alert(JSON.stringify(doc.value));
+        var jsonResponse = JSON.parse(this.responseText);
+        var doc = JSON.parse(jsonResponse.value);
+        var keys = Object.keys(doc);
 
-        var keys = Object.keys(JSON.parse(doc.value));
         for (i=0; i<keys.length; i++) {
           addItem();
           items[items.length-1].keyInput.value = keys[i];
@@ -80,7 +79,7 @@
     }
   </script>
 </head>
-  <div>Nome do documento::</div>
+  <div>Nome do documento:::</div>
   <div><input id='doc' type='text'> <button onclick='loadDoc()'>Load</button></div>
   <div id='content'></div>
   <div><button onclick='addItem()'>Add</button></div>
