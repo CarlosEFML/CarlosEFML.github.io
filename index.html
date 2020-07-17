@@ -68,7 +68,7 @@
         for (i=0; i<keys.length; i++) {
           addItem();
           items[items.length-1].keyInput.value = keys[i];
-          items[items.length-1].valueInput.value = doc.value[keys[i]];
+          items[items.length-1].valueInput.value = doc[keys[i]];
         }
       };
       oReq.open("get", "https://api.kvstore.io/collections/new_collection/items/" + docName, true);
@@ -79,14 +79,14 @@
     }
   </script>
 </head>
-  <div>Nome do documento:::</div>
+  <div>Nome do documento:</div>
   <div><input id='doc' type='text'> <button onclick='loadDoc()'>Load</button></div>
   <div id='content'></div>
   <div><button onclick='addItem()'>Add</button></div>
   <div><button onclick='saveDoc()'>Save</button></div>
   
 
-  <input id='val' type='text'>
-  <button onclick='sendData()'>OI</button>
+<!--   <input id='val' type='text'>
+  <button onclick='sendData()'>OI</button> -->
 </html>
 
