@@ -1,6 +1,6 @@
 <html>
 <head>
-  <script async src="https://api.kvstore.io/js/public.js?storage_uuid=a7630eeb-4619-45b5-bb1d-3c1833a6c877"></script>
+<!--   <script async src="https://api.kvstore.io/js/public.js?storage_uuid=a7630eeb-4619-45b5-bb1d-3c1833a6c877"></script>
   <script>
     function saveData(key, value) {
       window.post('new_collection', key, value);
@@ -8,12 +8,38 @@
     
     function loadData(key, callback) {
       var oReq = new XMLHttpRequest();
-      oReq.onload = callback;
+      oReq.onload = function() {
+        var jsonResponse = JSON.parse(this.responseText);
+        var val = JSON.parse(jsonResponse.value);
+        callback(val);
+      };
       oReq.open("get", "https://api.kvstore.io/collections/new_collection/items/" + key, true);
       oReq.setRequestHeader('kvstoreio_api_key', '593f80c2ba5b84871a40be8e498eb9c8083e57f5561f96121a7d4eefa3c52092');      
       oReq.send();
     }
-    
+  </script> -->
+
+  <script>
+    var appKey = "hr1g2upb";
+
+    function saveData(key, value) {
+      var oReq = new XMLHttpRequest();
+      oReq.onload = callback;
+      oReq.open("post", "https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/" + appKey + "/" + key + "/" + value, true);
+      oReq.send();
+    }
+
+    function loadData(key, callback) {
+      var oReq = new XMLHttpRequest();
+      oReq.onload = function() {
+        alert(this.responseText);
+      };
+      oReq.open("get", "https://keyvalue.immanuel.co/api/KeyVal/GetValue/" + appKey + "/" + key, true);
+      oReq.send();
+    }
+  </script>
+
+  <script>
     var items = [];
     function addItem() {
       var content = document.getElementById('content');
@@ -52,9 +78,7 @@
     function loadDoc() {
       var docName = document.getElementById('doc').value;
 
-      loadData(docName, function() {
-        var jsonResponse = JSON.parse(this.responseText);
-        var doc = JSON.parse(jsonResponse.value);
+      loadData(docName, function(doc) {
         var keys = Object.keys(doc);
 
         for (i=0; i<keys.length; i++) {
